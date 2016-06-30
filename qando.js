@@ -1,14 +1,16 @@
 var Qando = (function () {
   var sdk = {};
 
-  var QANDO_FRONT_URL = 'http://localhost:3000';
+  var QANDO_FRONT_URL = 'http://booking.qando.it';
 
   function makeIframeUrl(shop, service, options) {
     var url = QANDO_FRONT_URL + '/shops/' + shop;
     if (service) {
       url += '/booking/' + service;
     }
-    url += '?iframe=1';
+    url += '?iframe=1' +
+      '&iframeWithHeader=' + ~~options.header +
+      '&iframeWithFooter=' + ~~options.footer;
     return url;
   }
 
@@ -24,26 +26,17 @@ var Qando = (function () {
   sdk.booking = function(el, options) {
     var o = options || {};
 
-    var src = ''
+    var src = 'http://localhost:3000';
     var iframe = document.createElement('iframe');
-    iframe.src = makeIframeUrl(o.shop, o.service);
-    iframe.style.width = '100%';
-
-    //iframe.style.height = '1200px';
-
+    iframe.src = makeIframeUrl(o.shop, o.service, o);
     iframe.style.border = '0px';
+    iframe.style.width = '100%';
     iframe.frameborder = '0';
     iframe.scrolling = 'no';
-    iframe.onload = function() {
-      //console.log(iframe.contentWindow);
-      var x = iframe.contentWindow.document.body.scrollHeight;
-      //console.log('Loaded!');
-      //iframe.style.height = '1000px';  iframe.contentWindow.document.body.scrollHeight + 'px';
-    };
-    iFrameResize({log:true});
 
     // Set iframe content
     el.appendChild(iframe);
+    iFrameResize({checkOrigin:false, log:true});
   };
 
   return sdk;
