@@ -8,9 +8,10 @@ var Qando = (function () {
     if (service) {
       url += '/booking/' + service;
     }
-    url += '?iframe=1' +
+    url += '?iframe=' + shop +
       '&iframeWithHeader=' + ~~options.header +
-      '&iframeWithFooter=' + ~~options.footer;
+      '&iframeWithFooter=' + ~~options.footer +
+      '&iframeCustomCss='  + ~~options.css;
     return url;
   }
 
@@ -26,7 +27,6 @@ var Qando = (function () {
   sdk.booking = function(el, options) {
     var o = options || {};
 
-    var src = 'http://localhost:3000';
     var iframe = document.createElement('iframe');
     iframe.src = makeIframeUrl(o.shop, o.service, o);
     iframe.style.border = '0px';
