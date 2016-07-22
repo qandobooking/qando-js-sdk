@@ -1,18 +1,20 @@
 <html>
+  <head>
+    <title>Qando</title>
+  </head>
   <body>
+    <h1>Qando</h1>
     <div id="qando-root"></div>
-    <script src="https://rawgit.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.min.js"></script>
-    <script src="qando.js"></script>
-
-    <script>
-    (function() {
-      Qando.booking(document.getElementById('qando-root'), {
-        shop: 1,
+    <script type="text/javascript" src="/lib/qando.js"></script>
+    <script type="text/javascript">(function() {
+      qando.booking('#qando-root', {
+        shop: 'giova',
         service: 3,
-        header: false,
-        footer: false,
+        css: true,
+        header: true,
+        footer: true,
       });
-    }());
+    })();
     </script>
   </body>
 </html>
